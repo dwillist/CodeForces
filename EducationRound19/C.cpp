@@ -24,7 +24,13 @@ int main(){
   }
   for(int j = 0; j < s.size(); ++j){
     map<char,int>::iterator iter = M.begin();
-    if(s[j] <= iter->first){
+    if(t.size() && t[t.size()-1] <= iter->first){
+      u.append(1,t[t.size()-1]);
+      t.pop_back();
+      j--;
+      continue;
+    }
+    else if(s[j] <= iter->first){
       //printf("appending %c with count %d\n",s[j],M[s[j]]);
       u.append(1,s[j]);
     }
