@@ -5,21 +5,21 @@
 
 using namespace std;
 
-float lo = 0.0;
-float hi = 1e12;
+double lo = 0.0;
+double hi = 1e13;
 
 vector<pair<int,int> > V;
 int n,p;
 
-bool satisfies(float mid){
-  float total = 0;
+bool satisfies(double mid){
+  double total = 0;
   for(int i = 0; i < n; ++i){
-    float val = V[i].second - V[i].first*mid;
+    double val = double(V[i].second) - V[i].first*mid;
     if(val <= 0.0){
-      total += val;
+      total -= val;
     }
   }
-  return total < p;
+  return total < p*mid;
 }
 
 int main(){
@@ -35,16 +35,14 @@ int main(){
     printf("-1\n");
     return 0;
   }
-  float mid;
+  double mid;
   while(hi-lo > .00001){
-    printf("in loop %f\n",mid);
+    //printf("in loop %f %f\n",lo,hi);
     mid = (hi+lo)/2.0;
     if(satisfies(mid)){
-      printf("sat\n");
       lo = mid;
     }
     else{
-      printf("not sat\n");
       hi = mid;
     }
   }
